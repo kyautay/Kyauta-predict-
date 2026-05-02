@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(KyautaPredictApp());
+}
+
+class KyautaPredictApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Kyauta Predict',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  final List<Map<String, String>> predictions = [
+    {"match": "Arsenal vs Chelsea", "tip": "Over 2.5", "confidence": "78%"},
+    {"match": "Barcelona vs Sevilla", "tip": "BTTS Yes", "confidence": "72%"},
+    {"match": "Man City vs Liverpool", "tip": "Home Win", "confidence": "80%"},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Kyauta Predict")),
+      body: ListView.builder(
+        itemCount: predictions.length,
+        itemBuilder: (context, index) {
+          var item = predictions[index];
+          return Card(
+            child: ListTile(
+              title: Text(item["match"]!),
+              subtitle: Text(item["tip"]!),
+              trailing: Text(item["confidence"]!),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
